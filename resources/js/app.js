@@ -7,11 +7,13 @@
 require('./bootstrap');
 
 import Vue from 'vue/dist/vue'
+import axios from "axios";
 
 window.Vue = Vue
 
 import VueRouter from "vue-router";
 import routes from "./routes";
+Vue.component('layout-frontend', require('./layout/Layout').default);
 
 Vue.use(VueRouter)
 

@@ -1,0 +1,83 @@
+<template>
+    <div class="nav_c">
+        <div class="logo">
+            <h1>Logo</h1>
+        </div>
+        <div class="menu">
+
+            <router-link to="/painel">
+                <UilAngleRight size="12px" class="icon_angle" />
+                <UilEstate size="20px" class="icon_route" />
+                Painel
+            </router-link>
+
+            <router-link to="/painel/investimentos">
+                <UilAngleRight size="12px" class="icon_angle" />
+                <UilFileContractDollar size="20px" class="icon_route" />
+                Investimentos
+            </router-link>
+
+        </div>
+    </div>
+
+</template>
+
+<script>
+
+import { UilEstate, UilAngleRight, UilUsersAlt, UilFileContractDollar } from '@iconscout/vue-unicons'
+
+export default {
+    name: "Nav",
+    components:{ UilEstate, UilAngleRight, UilUsersAlt, UilFileContractDollar },
+}
+</script>
+
+<style scoped>
+    .nav_c{
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+
+    .menu{
+        float: left;
+        width: 100%;
+    }
+    .menu a{
+        width: 100%;
+        float: left;
+        text-decoration: none;
+        text-align: left;
+        padding: 15px;
+        font-weight: 700;
+        font-size: 14px;
+        color: #fff;
+    }
+    .menu a:hover{
+        background: #252936;
+        color: #ffffff;
+    }
+    .active-menu{
+        background: #252936 !important;
+    }
+    .bullet{
+        width: 4px;
+        height: 4px;
+        float: left;
+        border-radius: 100%!important;
+        background: #b5b5c3;
+        margin-top: 8px;
+        margin-right: 11px;
+    }
+    .logo h1{
+        font-size: 29px;
+        text-align: left;
+        padding: 22px 30px;
+    }
+    .icon_angle{
+
+    }
+    .icon_route{
+        margin: 0px 9px;
+    }
+</style>
