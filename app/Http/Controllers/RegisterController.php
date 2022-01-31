@@ -12,33 +12,6 @@ use Smalot\PdfParser\Parser;
 
 class RegisterController extends Controller
 {
-    public function teste(Request $request)
-    {
-        $file = $request->file;
-
-        $request->validate([
-            'file' => 'required|mimes:pdf',
-        ]);
-
-        $file = '';
-        $pdf = new Pdf;
-        $result = $pdf->addFile('./nota-de-corretagem.pdf', null, '129')
-            ->saveAs('./new.pdf');
-        if ($result === false) {
-            $error = $pdf->getError();
-            dd('erro', $error);
-        }
-        dd($result);
-        // use of pdf parser to read content from pdf
-//        $fileName = $file->getClientOriginalName();
-//
-//        $pdfParser = new Parser();
-//        $pdf = $pdfParser->parseFile($file->path());
-//        $content = $pdf->getText();
-//        $clear = str_replace("\t", '', $content);
-//        $result = explode("\n", $clear);
-//        dd($result);
-    }
 
     public function register(Request $request)
     {
