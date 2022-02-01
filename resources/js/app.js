@@ -7,7 +7,18 @@
 require('./bootstrap');
 
 import Vue from 'vue/dist/vue'
-import axios from "axios";
+import axios from "axios"
+
+import { BootstrapVue } from 'bootstrap-vue'
+
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue)
+
+window.collect = require('collect.js')
 
 window.Vue = Vue
 

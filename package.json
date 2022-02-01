@@ -27,7 +27,10 @@
         "@iconscout/vue-unicons": "^0.0.3",
         "bootstrap-vue": "^2.21.2",
         "chart.js": "^2.7.1",
+        "collect.js": "^4.31.3",
+        "v-money": "^0.8.1",
         "vue-chartjs": "^3.4.0",
-        "vue-router": "^3.5.3"
+        "vue-router": "^3.5.3",
+        "vue-the-mask": "^0.11.1"
     }
 }
