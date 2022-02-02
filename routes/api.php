@@ -23,6 +23,9 @@ Route::middleware('auth:sanctum')->get('/athenticated', function (Request $reque
 });
 
 Route::post('upload-pdf', [\App\Http\Controllers\investmentController::class, 'pdfToList']);
+Route::post('investiment', [\App\Http\Controllers\investmentController::class, 'store']);
+Route::get('investiment', [\App\Http\Controllers\investmentController::class, 'index']);
+Route::get('investiment/{id}', [\App\Http\Controllers\investmentController::class, 'show']);
 
 Route::post('register', [\App\Http\Controllers\RegisterController::class, 'register']);
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'login']);

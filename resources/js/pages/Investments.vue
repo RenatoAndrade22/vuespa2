@@ -2,24 +2,28 @@
     <div>
         <b-row>
             <b-row style="padding: 20px">
-                <b-col lg="3" v-if="!new_invest">
+                <b-col lg="3" v-if="!new_invest && !list_investiment">
                     <b-form-input
                         type="text"
                         placeholder="Buscar investimento"
                     ></b-form-input>
                 </b-col>
                 <b-col>
-                    <b-button variant="primary" @click="new_invest = !new_invest" v-if="!new_invest">
+                    <b-button variant="primary" @click="new_invest = !new_invest" v-if="!new_invest && !list_investiment">
                         Cadastrar novo
                     </b-button>
-                    <p @click="new_invest = !new_invest"  v-if="new_invest"> <- Voltar</p>
+                    <p @click="new_invest = !new_invest"  v-if="new_invest" class="float-start" style="margin: 0; cursor:pointer;"> <- Voltar</p>
+                    <p @click="list_investiment = null"  v-if="list_investiment" class="float-start" style="margin: 0; cursor:pointer;"> <- Voltar</p>
+                    <b-button variant="primary" class="float-end" @click="record" v-if="form">Cadastrar</b-button>
                 </b-col>
             </b-row>
 
-            <b-col lg="12" v-if="!new_invest">
+            <b-col lg="12" v-if="!new_invest && !list_investiment">
                 <div class="card_column">
                     <b-table :items="items" :fields="fields">
-<!--                        <template #table-caption>This is a table caption.</template>-->
+                        <template v-slot:cell(ver)="row">
+                            <b-button variant="primary" @click="view(row.item.id)">ver</b-button>
+                        </template>
                     </b-table>
                 </div>
             </b-col>
@@ -30,7 +34,6 @@
                         <b-col lg="12" v-if="!form">
                             <div class="upload">
                                 <form @submit="formSubmit" enctype="multipart/form-data">
-                                    <p>{{ form }}</p>
                                     <h4 class="text-center">Faça o upload da nota de corretagem</h4>
                                     <input type="file" class="form-control mt-3" v-on:change="onFileChange">
                                     <button class="btn btn-success mt-3">Cadastrar</button>
@@ -157,6 +160,9 @@
                 </div>
             </template>
         </b-modal>
+
+        <Investment v-if="list_investiment" :content="list_investiment" />
+
     </div>
 </template>
 
@@ -164,18 +170,19 @@
 import { BRow, BCol, BTable, BButton, BFormInput, BFormGroup } from 'bootstrap-vue'
 import { UilEdit } from '@iconscout/vue-unicons'
 import {TheMask} from 'vue-the-mask'
-
 import {mask} from 'vue-the-mask'
 import {Money} from 'v-money'
+import Investment from "./Investment";
 
 export default {
     components:{
-        BRow, BCol, BTable, BButton, BFormInput, BFormGroup, UilEdit, TheMask, Money
+        BRow, BCol, BTable, BButton, BFormInput, BFormGroup, UilEdit, TheMask, Money, Investment
     },
     directives: {mask},
 
     data() {
         return {
+            list_investiment: null,
             money: {
                 decimal: ',',
                 thousands: '.',
@@ -188,45 +195,43 @@ export default {
             name: '',
             file: '',
             success: '',
-            fields: ['ações', 'quantidade'],
+            fields: ['ações', 'quantidade', 'ver'],
             fields_upload: ['cv', 'mercadoria', 'preco', 'quantidade', 'tipo', 'taxa', 'valor', 'vencimento', 'editar'],
-            form: [
-                {
-                    index: 1,
-                    cv: 'C',
-                    mercadoria: 'WING22',
-                    preco: '109.430,0000',
-                    quantidade: '1',
-                    taxa: '0,00',
-                    tipo: 'DAY TRADE',
-                    valor: '59,80',
-                    vencimento: '16/02/2022',
-                    edit: false,
-                },
-                {
-                    index: 2,
-                    cv: 'V',
-                    mercadoria: 'WING22',
-                    preco: '109.910,0000',
-                    quantidade: '1',
-                    taxa: '0,00',
-                    tipo: 'DAY TRADE',
-                    valor: '163,80',
-                    vencimento: '16/02/2022',
-                    edit: false,
-                },
-            ],
+            form: null,
 
             form_edit: null,
+            actions: [],
 
             items: [
-                { quantidade: 89, ações: 'PETRO' },
-                { quantidade: 40, ações: 'ABEV3' },
-                { quantidade: 21, ações: 'MRVE3' },
+
             ]
         }
     },
+    created() {
+        this.getActions()
+    },
     methods: {
+
+        view(id){
+
+            axios.get('/api/investiment/'+id)
+                .then((resp)=>{
+                    this.list_investiment = resp.data
+                })
+        },
+
+        record(){
+
+            axios.post('/api/investiment', this.form)
+                .then((resp)=>{
+                    this.form = null
+                    this.$toast.open({
+                        message: 'Investimentos cadastrados!',
+                        type: 'success',
+                    });
+                    this.new_invest = false
+                })
+        },
 
         editSave(){
             this.form = collect(this.form).map((item)=>{
@@ -248,6 +253,7 @@ export default {
         },
 
         editar(index){
+            console.log('index', index)
             this.form_edit = collect(this.form).where('index', index)
             this.form_edit = this.form_edit.items
             this.$bvModal.show('modal-edit')
@@ -275,6 +281,13 @@ export default {
                 })
                 .catch(function (error) {
                 });
+        },
+
+        getActions(){
+            axios.get('/api/investiment')
+                .then((resp)=>{
+                    this.items = resp.data
+                })
         }
     }
 }
