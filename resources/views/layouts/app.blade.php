@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-            <layout-frontend></layout-frontend>
+{{--            <layout-frontend></layout-frontend>--}}
     </div>
 </body>
 </html>

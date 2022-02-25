@@ -8,7 +8,7 @@ require('./bootstrap');
 
 import Vue from 'vue/dist/vue'
 import axios from "axios"
-
+import LayoutFrontend from "./pages/LayoutFrontend";
 import { BootstrapVue } from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -27,11 +27,13 @@ window.Vue = Vue
 
 import VueRouter from "vue-router";
 import routes from "./routes";
-Vue.component('layout-frontend', require('./layout/Layout').default);
+// Vue.component('layout-frontend', require('./layout/Layout').default);
 
 Vue.use(VueRouter)
 
 const app = new Vue({
     el: '#app',
-    router: new VueRouter(routes)
-});
+    router: new VueRouter(routes),
+    render: h => h(LayoutFrontend),
+
+}).$mount('#app');

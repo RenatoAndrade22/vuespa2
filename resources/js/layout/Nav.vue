@@ -1,12 +1,12 @@
 <template>
     <div class="nav_c">
         <div class="logo">
-            <h1>Logo</h1>
+            <img src="/images/logo.png" alt="">
         </div>
         <div class="menu">
 
             <router-link to="/painel">
-                <UilAngleRight size="12px" class="icon_angle" />
+                <UilAngleRight color="#626262" size="12px" class="icon_angle" />
                 <UilEstate size="20px" class="icon_route" />
                 Painel
             </router-link>
@@ -51,15 +51,11 @@ export default {
         padding: 15px;
         font-weight: 700;
         font-size: 14px;
-        color: #fff;
+        color: #626262;
     }
-    .menu a:hover{
-        background: #252936;
-        color: #ffffff;
-    }
-    .active-menu{
-        background: #252936 !important;
-    }
+    /*.active-menu{*/
+    /*    background: #252936 !important;*/
+    /*}*/
     .bullet{
         width: 4px;
         height: 4px;
@@ -73,9 +69,6 @@ export default {
         font-size: 29px;
         text-align: left;
         padding: 22px 30px;
-    }
-    .icon_angle{
-
     }
     .icon_route{
         margin: 0px 9px;

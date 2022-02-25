@@ -36,7 +36,7 @@
                                 <form @submit="formSubmit" enctype="multipart/form-data">
                                     <h4 class="text-center">Faça o upload da nota de corretagem</h4>
                                     <input type="file" class="form-control mt-3" v-on:change="onFileChange">
-                                    <button class="btn btn-success mt-3">Cadastrar</button>
+                                    <button class="btn btn-success mt-3">Upload PDF</button>
                                 </form>
                             </div>
                         </b-col>
@@ -229,7 +229,9 @@ export default {
                         message: 'Investimentos cadastrados!',
                         type: 'success',
                     });
+                    this.getActions()
                     this.new_invest = false
+
                 })
         },
 

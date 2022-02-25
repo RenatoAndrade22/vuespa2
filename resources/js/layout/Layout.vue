@@ -21,5 +21,9 @@ export default {
 </script>
 
 <style scoped>
-    
+#main{
+    background: #f4f7fa !important;
+    float: left;
+    width: 100%;
+}
 </style>

@@ -6,8 +6,8 @@ $bg-primary-hover: #252936;
 *{
     font-family: 'Montserrat', sans-serif;
 }
-body{
-    background: #f4f7fa !important;
+html, body {
+    height: 100%;
 }
 #main{
     width: 100%;
@@ -17,7 +17,7 @@ body{
     width: 20%;
     min-height:100vh;
     float: left;
-    background: $bg-primary;
+    background: #ffffff;
     box-shadow: 0 1px 15px 1px rgb(69 65 78 / 8%);
 }
 .content{
@@ -26,7 +26,6 @@ body{
     padding: 15px;
 }
 .logo{
-    background: $bg-primary;
     width: 100%;
     float: left;
     color: #ffffff;
