@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Investments from "./pages/Investments";
 import LayoutFrontend from "./pages/LayoutFrontend";
 import Layout from "./layout/Layout";
+
 export default {
     mode: 'history',
     linkActiveClass:'active-menu',
